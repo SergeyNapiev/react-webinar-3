@@ -50,12 +50,22 @@ body {
 }
 
 .Item-title {
-  width: 100%;
-  padding: 20px 10px;
+  width: auto;
+  padding-top: 20px;
+  padding-right: 0px;
+  padding-bottom: 20px;
+  padding-left: 10px;
+}
+
+.Item-count {
+  width: auto;
+  padding-top: 20px;
+  padding-right: 10px;
+  padding-bottom: 20px;
+  padding-left: 4px;
 }
 
 .Item-actions {
-  display: flex;
-  justify-content: flex-end;
+  margin-left: auto;
   padding: 20px 20px 20px 10px;
 }

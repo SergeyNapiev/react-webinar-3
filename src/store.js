@@ -5,6 +5,9 @@ class Store {
   constructor(initState = {}) {
     this.state = initState;
     this.listeners = []; // Слушатели изменений состояния
+    this.maxCode = initState.list.length > 0
+      ? Math.max(...initState.list.map(item => item.code)) // Инициализируем максимальный код на старте
+      : 0;
   }
 
   /**
@@ -42,9 +45,11 @@ class Store {
    * Добавление новой записи
    */
   addItem() {
+    this.maxCode += 1;
+
     this.setState({
       ...this.state,
-      list: [...this.state.list, { code: this.state.list.length + 1, title: 'Новая запись' }],
+      list: [...this.state.list, { code: this.maxCode, title: 'Новая запись', selectCount: 0 }],
     });
   }
 
@@ -69,6 +74,11 @@ class Store {
       list: this.state.list.map(item => {
         if (item.code === code) {
           item.selected = !item.selected;
+          if (item.selected) {
+            item.selectCount = (item.selectCount || 0) + 1;
+          }
+        } else {
+          item.selected = false;
         }
         return item;
       }),
